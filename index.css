@@ -1,0 +1,119 @@
+body{
+    margin: 0;
+}
+
+header{
+    background-color: rgb(24, 30, 41);
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    color: white;
+
+}
+
+#headerMainDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+#brand{
+    font-weight: bold;
+    font-size: 30px; 
+}
+
+#headerMenu {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.headerButton {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px; 
+}
+
+#register {
+    border-radius: 4px;
+    border: 2px solid white;
+}
+
+#headerSearch {
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+#searchContainer {
+    height: 500px;
+    background-color: rgb(24, 30, 41);
+    padding-top: 40px;
+    padding-bottom: 50px;
+    display: relative;
+}
+
+#searchImgContainer {
+    height: 500px;
+    background-color: rgb(56, 56, 56);
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+}
+
+#searchImg {
+    filter: grayscale(0.6);
+    opacity: 0.15;
+    width: 100%;
+    object-fit: cover;
+    z-index: 50;
+}
+
+#searchPara {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    z-index: 100;
+    color: white;
+    font-size: 4em;
+}
+
+#searchForm {
+    opacity: 1;
+    position: absolute;
+    top: 375px;
+    left: 100px;
+    background-color: white;
+    z-index: 100;
+    height: 60px;
+    border-radius: 8px;
+}
+
+#searchForm > span {
+    padding-left: 6px;
+}
+
+#searchForm > input {
+    border: 0;
+    height: 100%;
+    width: 500px;
+    font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#searchForm > input:focus {
+    outline: none;
+}
+
+#searchForm > button {
+    background-color: rgb(50, 90, 165);
+    border: 0;
+    height: 100%;
+    opacity: 1;
+    font-size: 1em;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    color: white;
+}

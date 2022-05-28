@@ -6,11 +6,11 @@
 				<div id="brandPoint">.</div>
 				gg
 			</div>
-			<div id="headerMenu">
-				<a class="headerButton">Français</a>
-				<a class="headerButton">Donner des cours</a>
-				<a class="headerButton">Se connecter</a>
-				<a class="headerButton registerNormal" id="register">S'inscrire</a>
+			<div id="menu">
+				<a class="menuButton">Français</a>
+				<a class="menuButton">Donner des cours</a>
+				<a class="menuButton">Se connecter</a>
+				<a class="menuButton registerNormal" id="register">S'inscrire</a>
 			</div>
 		</div>
 
@@ -45,11 +45,11 @@ function updateHeader(pageYOffset) {
 	let brandPointElement = document.getElementById('brandPoint');
 	if (pageYOffset == 0) {
 		brandElement.className = 'brandContainer headerNormal';
-		registerElement.className = 'headerButton registerNormal';
+		registerElement.className = 'menuButton registerNormal';
 		brandPointElement.className = 'brandPointNormal';
 	} else {
 		brandElement.className = 'brandContainer headerAfterScroll';
-		registerElement.className = 'headerButton registerAfterScroll';
+		registerElement.className = 'menuButton registerAfterScroll';
 		brandPointElement.className = 'brandPointAfterScroll';
 	}
 }
@@ -111,12 +111,12 @@ function updateCategory(pageYOffset) {
 	color: #325aa5;
 }
 
-#headerMenu {
+#menu {
 	margin-top: auto;
 	margin-bottom: auto;
 }
 
-.headerButton {
+.menuButton {
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-top: 5px;

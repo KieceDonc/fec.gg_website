@@ -1,21 +1,50 @@
 <template>
-	<div id="headerContainer" class="headerNormal">
+	<div
+		id="headerContainer"
+		class="brandContainer"
+		v-bind:class="{
+			headerBeforeScroll: isInBeforeScrollStateLvl1,
+			headerNormal: !isInBeforeScrollStateLvl1,
+		}"
+	>
 		<div id="brandContainer">
 			<div id="brand">
 				<div class="brandName">Fec</div>
-				<div id="brandPoint">.</div>
+				<div
+					id="brandPoint"
+					v-bind:class="{
+						brandPointBeforeScroll: isInBeforeScrollStateLvl1,
+						brandPointNormal: !isInBeforeScrollStateLvl1,
+					}"
+				>
+					.
+				</div>
 				<div class="brandName">gg</div>
-				<SearchBar scaleFactor="0.8" visibility="{{searchBarVisibility}}" />
+				<SearchBar id="headerSearchBar" />
 			</div>
 			<div id="menu">
 				<a class="menuButton">Français</a>
 				<a class="menuButton">Donner des cours</a>
 				<a class="menuButton">Se connecter</a>
-				<a class="menuButton registerNormal" id="register">S'inscrire</a>
+				<a
+					v-bind:class="{
+						registerBeforeScroll: isInBeforeScrollStateLvl1,
+						registerNormal: !isInBeforeScrollStateLvl1,
+					}"
+					class="menuButton"
+					id="register"
+					>S'inscrire</a
+				>
 			</div>
 		</div>
 
-		<div class="categoryContainerHidden" id="categoryContainer">
+		<div
+			v-bind:class="{
+				categoryContainerBeforeScroll: isInBeforeScrollStateLvl2,
+				categoryContainerNormal: !isInBeforeScrollStateLvl2,
+			}"
+			id="categoryContainer"
+		>
 			<a>LoL</a>
 			<a>Valorant</a>
 			<a>TFT</a>
@@ -35,44 +64,39 @@ export default {
 	name: 'Header',
 	components: { SearchBar },
 	props: {
-		searchBarVisibility: {
-			type: String,
+		isInHomePage: {
+			type: Boolean,
 			required: false,
-			default: 'visible',
+			default: false,
 		},
 	},
+	data: function () {
+		return {
+			scrollPosition: 0,
+			isInBeforeScrollStateLvl1: this.isInHomePage,
+			isInBeforeScrollStateLvl2: this.isInHomePage,
+		};
+	},
+	methods: {
+		updateScroll() {
+			this.scrollPosition = window.scrollY;
+			this.isInBeforeScrollStateLvl1 =
+				this.isInHomePage && this.scrollPosition == 0;
+			this.isInBeforeScrollStateLvl2 =
+				this.isInHomePage && this.scrollPosition < 225;
+		},
+	},
+	mounted() {
+		if (this.isInHomePage) {
+			window.addEventListener('scroll', this.updateScroll);
+		}
+	},
+	destroy() {
+		if (this.isInHomePage) {
+			window.removeEventListener('scroll', this.updateScroll);
+		}
+	},
 };
-
-window.addEventListener('scroll', function () {
-	let pageYOffset = window.pageYOffset;
-	updateHeader(pageYOffset);
-	updateCategory(pageYOffset);
-});
-
-function updateHeader(pageYOffset) {
-	let brandElement = document.getElementById('brandContainer').parentElement;
-	let registerElement = document.getElementById('register');
-	let brandPointElement = document.getElementById('brandPoint');
-	if (pageYOffset == 0) {
-		brandElement.className = 'brandContainer headerNormal';
-		registerElement.className = 'menuButton registerNormal';
-		brandPointElement.className = 'brandPointNormal';
-	} else {
-		brandElement.className = 'brandContainer headerAfterScroll';
-		registerElement.className = 'menuButton registerAfterScroll';
-		brandPointElement.className = 'brandPointAfterScroll';
-	}
-}
-
-function updateCategory(pageYOffset) {
-	let categoryElement = document.getElementById('categoryContainer');
-
-	if (pageYOffset < 225) {
-		categoryElement.className = 'categoryContainerHidden';
-	} else {
-		categoryElement.className = 'categoryContainerAfterScroll';
-	}
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -84,12 +108,12 @@ function updateCategory(pageYOffset) {
 	width: 100%;
 }
 
-.headerNormal {
+.headerBeforeScroll {
 	color: white;
 	transition: background-color 400ms linear;
 }
 
-.headerAfterScroll {
+.headerNormal {
 	background-color: #eeeeee;
 	z-index: 200;
 	color: black;
@@ -118,12 +142,16 @@ function updateCategory(pageYOffset) {
 	line-height: 0;
 }
 
-.brandPointNormal {
+.brandPointBeforeScroll {
 	color: white;
 }
 
-.brandPointAfterScroll {
+.brandPointNormal {
 	color: #325aa5;
+}
+
+#headerSearchBar {
+	transform: scale(0.8);
 }
 
 #menu {
@@ -144,12 +172,12 @@ function updateCategory(pageYOffset) {
 	margin-right: 100px;
 }
 
-.registerNormal {
+.registerBeforeScroll {
 	border: 2px solid white;
 }
 
-.registerAfterScroll {
-	border: 2px solid rgb(50, 90, 165);
+.registerNormal {
+	border: 2px solid #325aa5;
 }
 
 #categoryContainer {
@@ -159,7 +187,7 @@ function updateCategory(pageYOffset) {
 	color: #555555;
 }
 
-.categoryContainerHidden {
+.categoryContainerBeforeScroll {
 	opacity: 0;
 	height: 0;
 	overflow: hidden;
@@ -167,7 +195,7 @@ function updateCategory(pageYOffset) {
 	border: 0;
 }
 
-.categoryContainerAfterScroll {
+.categoryContainerNormal {
 	opacity: 1;
 	height: auto;
 	margin-top: 20px;

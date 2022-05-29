@@ -1,5 +1,5 @@
 <template>
-	<Header />
+	<Header :isInHomePage="true" />
 	<div id="searchMainContainer">
 		<div id="searchSecondContainer">
 			<p id="searchPara">Trouver un coach <br /><b>pour vous</b> améliorer</p>

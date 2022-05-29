@@ -1,5 +1,5 @@
 <template>
-	<form :style="cssVars" class="searchForm">
+	<form class="searchForm">
 		<span style="width: 16px; height: 16px">
 			<svg
 				width="16"
@@ -25,24 +25,10 @@
 <script>
 export default {
 	name: 'SearchBar',
-	props: {
-		scaleFactor: {
-			type: String,
-			required: false,
-			default: '1',
-		},
-		visibility: {
-			type: String,
-			required: false,
-			default: 'visible',
-		},
-	},
 	computed: {
 		cssVars() {
 			return {
-				'--scaleFactor': this.scaleFactor,
 				'--fontSize': this.fontSize,
-				'--visible': this.visibility,
 			};
 		},
 	},
@@ -55,8 +41,6 @@ export default {
 	height: 60px;
 	border-radius: 8px;
 	display: table-cell;
-	scale: var(--scaleFactor);
-	visibility: var(--visible);
 }
 
 .searchForm > span {

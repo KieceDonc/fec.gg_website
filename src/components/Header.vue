@@ -2,9 +2,10 @@
 	<div id="headerContainer" class="headerNormal">
 		<div id="brandContainer">
 			<div id="brand">
-				Fec
+				<div class="brandName">Fec</div>
 				<div id="brandPoint">.</div>
-				gg
+				<div class="brandName">gg</div>
+				<SearchBar scaleFactor="0.8" visibility="{{searchBarVisibility}}" />
 			</div>
 			<div id="menu">
 				<a class="menuButton">Français</a>
@@ -29,8 +30,17 @@
 </template>
 
 <script>
+import SearchBar from './SearchBar.vue';
 export default {
 	name: 'Header',
+	components: { SearchBar },
+	props: {
+		searchBarVisibility: {
+			type: String,
+			required: false,
+			default: 'visible',
+		},
+	},
 };
 
 window.addEventListener('scroll', function () {
@@ -94,13 +104,18 @@ function updateCategory(pageYOffset) {
 #brand {
 	display: flex;
 	font-weight: bold;
-	font-size: 30px;
 	margin-left: 100px;
+	align-items: center;
+}
+
+.brandName {
+	font-size: 30px;
 }
 
 #brandPoint {
 	font-size: 58px;
-	line-height: 0.3;
+	display: inline-table;
+	line-height: 0;
 }
 
 .brandPointNormal {

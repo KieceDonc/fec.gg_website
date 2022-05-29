@@ -20,7 +20,13 @@
 					.
 				</div>
 				<div class="brandName">gg</div>
-				<SearchBar id="headerSearchBar" />
+				<SearchBar
+					id="headerSearchBar"
+					v-bind:class="{
+						headerSearchBarVisible: !isInBeforeScrollStateLvl2,
+						headerSearchBarHidden: isInBeforeScrollStateLvl2,
+					}"
+				/>
 			</div>
 			<div id="menu">
 				<a class="menuButton">Français</a>
@@ -152,6 +158,17 @@ export default {
 
 #headerSearchBar {
 	transform: scale(0.8);
+	transition: opacity 400ms linear;
+}
+
+.headerSearchBarVisible {
+	visibility: visible;
+	opacity: 1;
+}
+
+.headerSearchBarHidden {
+	visibility: hidden;
+	opacity: 0;
 }
 
 #menu {

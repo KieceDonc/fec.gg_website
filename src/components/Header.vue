@@ -231,6 +231,10 @@ export default {
 }
 
 #categoryContainer > a:hover {
+	cursor: pointer;
+}
+
+#categoryContainer > a:hover {
 	text-decoration: underline;
 }
 </style>

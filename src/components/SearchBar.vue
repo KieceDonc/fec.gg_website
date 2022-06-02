@@ -71,4 +71,8 @@ export default {
 	border-bottom-right-radius: 7px;
 	color: white;
 }
+
+.searchForm > button:hover {
+	cursor: pointer;
+}
 </style>

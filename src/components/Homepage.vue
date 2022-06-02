@@ -18,17 +18,21 @@
 	</div>
 
 	<div id="tmp"></div>
+
+	<Footer />
 </template>
 
 <script>
 import Header from './Header.vue';
 import SearchBar from './SearchBar.vue';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'Homepage',
 	components: {
 		Header,
 		SearchBar,
+		Footer,
 	},
 };
 </script>
@@ -36,7 +40,7 @@ export default {
 <style scoped>
 #searchMainContainer {
 	height: 500px;
-	background-color: rgb(24, 30, 41);
+	background-color: #181e29;
 	padding-bottom: 36px;
 	padding-top: 100px;
 }

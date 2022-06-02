@@ -13,7 +13,12 @@
 			</div>
 		</div>
 		<div id="searchImgContainer">
-			<img id="searchImg" src="../assets/lol.jpg" alt="search background" />
+			<img
+				class="searchImg"
+				src="../assets/lol.jpg"
+				alt="search background"
+				style="display: flex"
+			/>
 		</div>
 	</div>
 
@@ -23,9 +28,9 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import SearchBar from './SearchBar.vue';
-import Footer from './Footer.vue';
+import Header from '../components/Header.vue';
+import SearchBar from '../components/SearchBar.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
 	name: 'Homepage',
@@ -93,7 +98,7 @@ export default {
 	z-index: 0;
 }
 
-#searchImg {
+.searchImg {
 	filter: grayscale(0.6);
 	opacity: 0.15;
 	width: 100%;

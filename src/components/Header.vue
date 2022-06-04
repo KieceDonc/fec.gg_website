@@ -70,18 +70,12 @@ import SearchBar from "./SearchBar.vue";
 export default {
   name: "Header",
   components: { SearchBar },
-  props: {
-    isInHomePage: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
   data: function () {
     return {
       scrollPosition: 0,
       isInBeforeScrollStateLvl1: this.isInHomePage,
       isInBeforeScrollStateLvl2: this.isInHomePage,
+      isInHomePage: true,
     };
   },
   methods: {
@@ -92,15 +86,30 @@ export default {
       this.isInBeforeScrollStateLvl2 =
         this.isInHomePage && this.scrollPosition < 225;
     },
-  },
-  mounted() {
-    if (this.isInHomePage) {
+    addScrollListener() {
       window.addEventListener("scroll", this.updateScroll);
-    }
+    },
+    removeScrollListener() {
+      window.removeEventListener("scroll", this.updateScroll);
+    },
+  },
+  watch: {
+    $route(to, from) {
+      if (to.fullPath === "/") {
+        this.isInHomePage = true;
+        this.addScrollListener();
+        this.updateScroll();
+      } else {
+        this.isInHomePage = false;
+        if (from.fullPath === "/") {
+          this.removeScrollListener();
+        }
+      }
+    },
   },
   destroy() {
     if (this.isInHomePage) {
-      window.removeEventListener("scroll", this.updateScroll);
+      this.removeScrollListener();
     }
   },
 };

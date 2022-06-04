@@ -1,5 +1,5 @@
 <template>
-  <Header :isInHomePage="true" />
+  <Header />
   <router-view />
   <Footer />
 </template>

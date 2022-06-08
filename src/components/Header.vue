@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import SearchBar from "./SearchBar.vue";
+import SearchBar from './SearchBar.vue';
 export default {
-  name: "Header",
+  name: 'Header',
   components: { SearchBar },
   data: function () {
     return {
@@ -87,21 +87,23 @@ export default {
         this.isInHomePage && this.scrollPosition < 225;
     },
     addScrollListener() {
-      window.addEventListener("scroll", this.updateScroll);
+      window.addEventListener('scroll', this.updateScroll);
     },
     removeScrollListener() {
-      window.removeEventListener("scroll", this.updateScroll);
+      window.removeEventListener('scroll', this.updateScroll);
     },
   },
   watch: {
     $route(to, from) {
-      if (to.fullPath === "/") {
+      window.scrollTo(0, 0);
+
+      if (to.fullPath === '/') {
         this.isInHomePage = true;
         this.addScrollListener();
         this.updateScroll();
       } else {
         this.isInHomePage = false;
-        if (from.fullPath === "/") {
+        if (from.fullPath === '/') {
           this.removeScrollListener();
         }
       }
@@ -130,7 +132,7 @@ export default {
 }
 
 .headerNormal {
-  background-color: #eeeeee;
+  background-color: var(--second-background-color);
   z-index: 200;
   color: black;
   transition: background-color 400ms linear;
@@ -170,7 +172,7 @@ export default {
 }
 
 .brandPointNormal {
-  color: #325aa5;
+  color: var(--main-border-color);
 }
 
 #headerSearchBar {
@@ -211,14 +213,14 @@ export default {
 }
 
 .registerNormal {
-  border: 2px solid #325aa5;
+  border: 2px solid var(--main-button-color);
 }
 
 #categoryContainer {
   display: flex;
   justify-content: space-evenly;
   transition: all 0.4s ease-in-out;
-  color: #555555;
+  color: var(--second-text-color);
 }
 
 .categoryContainerBeforeScroll {
@@ -233,8 +235,8 @@ export default {
   opacity: 1;
   height: auto;
   margin-top: 20px;
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
+  border-top: 1px solid var(--second-border-color);
+  border-bottom: 1px solid var(--second-border-color);
 }
 
 .category {

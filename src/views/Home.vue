@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import SearchBar from "../components/SearchBar.vue";
+import SearchBar from '../components/SearchBar.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     SearchBar,
   },
@@ -38,7 +38,7 @@ export default {
 <style scoped>
 #searchMainContainer {
   height: 500px;
-  background-color: #181e29;
+  background-color: var(--main-background-color);
   padding-bottom: 36px;
   padding-top: 100px;
 }
@@ -85,7 +85,7 @@ export default {
 
 #searchImgContainer {
   height: 500px;
-  background-color: rgb(56, 56, 56);
+  background-color: #383838;
   display: flex;
   justify-content: center;
   z-index: 0;

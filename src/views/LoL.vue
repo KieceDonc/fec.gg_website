@@ -1,9 +1,10 @@
 <template>
   <div id="LolContainer">
     <CriteriasMenu
-      :frontName="criteriasfrontName"
-      :criteriasName="criteriasName"
-      :criterias="criterias"
+      :ranks="criteriasRanks"
+      :ranksImgs="criteriasRanksImg"
+      :regions="criteriasRegions"
+      :regionsImgs="criteriasRegionsImg"
     />
   </div>
 </template>
@@ -16,23 +17,55 @@ export default {
   components: { CriteriasMenu },
   data: function () {
     return {
-      criteriasfrontName: 'Profil du coach',
-      criteriasName: ['Avis', 'Langues', 'Rank', 'Région'],
-      criterias: [
-        ['< 3', '3', '4', '5'],
-        ['Fr', 'En', 'Es', 'De', 'It'],
-        [
-          'Iron',
-          'Bronze',
-          'Silver',
-          'Gold',
-          'Platinum',
-          'Diamond',
-          'Master',
-          'Grand Master',
-          'Challenger',
-        ],
-        ['EUW', 'EUNE', 'RU', 'TR', 'KR', 'OCE', 'BR', 'LAS', 'LAN'],
+      criteriasRanks: [
+        'Pro',
+        'Challenger',
+        'Grand Master',
+        'Master',
+        'Diamond',
+        'Platinum',
+        'Gold',
+        'Silver',
+        'Bronze',
+        'Iron',
+      ],
+      criteriasRanksImg: [
+        require('@/assets/lol/ranks/pro.png'),
+        require('@/assets/lol/ranks/challenger.webp'),
+        require('@/assets/lol/ranks/grandmaster.webp'),
+        require('@/assets/lol/ranks/master.webp'),
+        require('@/assets/lol/ranks/diamond.webp'),
+        require('@/assets/lol/ranks/platinum.webp'),
+        require('@/assets/lol/ranks/gold.webp'),
+        require('@/assets/lol/ranks/silver.webp'),
+        require('@/assets/lol/ranks/bronze.webp'),
+        require('@/assets/lol/ranks/iron.webp'),
+      ],
+      criteriasRegions: [
+        'EUW',
+        'EUNE',
+        'NA',
+        'KR',
+        'RU',
+        'TR',
+        'OCE',
+        'BR',
+        'LAS',
+        'LAN',
+        'JP',
+      ],
+      criteriasRegionsImg: [
+        require('@/assets/lol/regions/euw.webp'),
+        require('@/assets/lol/regions/eune.webp'),
+        require('@/assets/lol/regions/na.webp'),
+        require('@/assets/lol/regions/kr.png'),
+        require('@/assets/lol/regions/ru.webp'),
+        require('@/assets/lol/regions/tr.webp'),
+        require('@/assets/lol/regions/oce.webp'),
+        require('@/assets/lol/regions/br.webp'),
+        require('@/assets/lol/regions/las.webp'),
+        require('@/assets/lol/regions/lan.webp'),
+        require('@/assets/lol/regions/jp.webp'),
       ],
     };
   },
@@ -41,7 +74,6 @@ export default {
 
 <style scoped>
 #LolContainer {
-  height: 1000px;
   padding-top: 181px;
 }
 </style>

@@ -14,7 +14,7 @@
     <div id="searchImgContainer">
       <img
         class="searchImg"
-        src="../assets/lol.jpg"
+        src="../assets/lol/background.jpg"
         alt="search background"
         style="display: flex"
       />

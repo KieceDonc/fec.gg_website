@@ -74,6 +74,6 @@ export default {
 
 <style scoped>
 #LolContainer {
-  padding-top: 181px;
+  padding-top: var(--header-height);
 }
 </style>

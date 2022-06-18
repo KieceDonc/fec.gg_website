@@ -32,7 +32,7 @@
       <div id="menu">
         <a class="menuButton">Français</a>
         <a class="menuButton">Donner des cours</a>
-        <a class="menuButton">Se connecter</a>
+        <router-link class="menuButton" to="/Login">Se connecter</router-link>
         <a
           v-bind:class="{
             registerBeforeScroll: isInBeforeScrollStateLvl1,
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import SearchBar from './SearchBar.vue';
+import SearchBar from '../../components/SearchBar.vue';
 export default {
   name: 'Header',
   components: { SearchBar },
@@ -100,13 +100,14 @@ export default {
       if (to.fullPath === '/') {
         this.isInHomePage = true;
         this.addScrollListener();
-        this.updateScroll();
       } else {
         this.isInHomePage = false;
         if (from.fullPath === '/') {
           this.removeScrollListener();
         }
       }
+
+      this.updateScroll();
     },
   },
   destroy() {
@@ -201,6 +202,11 @@ export default {
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
+  text-decoration: none;
+}
+
+.menuButton:visited {
+  color: inherit;
 }
 
 #register {

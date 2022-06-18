@@ -10,10 +10,10 @@
 
   padding: 12px 16px 12px 42px;
   border: none;
-  border-radius: 3px;
+  border-radius: 20px;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
 
-  color: #757575;
+  color: black;
   font-size: 14px;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,

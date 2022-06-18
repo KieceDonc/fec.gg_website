@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
+import Header from './views/Shared/Header.vue';
+import Footer from './views/Shared/Footer.vue';
 
 export default {
   name: 'App',
@@ -36,5 +36,7 @@ body {
   --main-text-color: #000000;
   --second-text-color: #555555;
   --third-text-color: #3f3f3f;
+
+  --header-height: 181px;
 }
 </style>

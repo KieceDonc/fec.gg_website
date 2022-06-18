@@ -1,23 +1,25 @@
 <template>
-  <Container>
+  <MainContainer>
     <h1>Content de te revoir !</h1>
     <p>Vous n'avez pas encore de compte ? Inscrivez-vous ici</p>
     <div>
       <GoogleButton />
-      <p>Continuer avec l'addresse mail</p>
+      <p>Continuer avec l'adresse mail</p>
     </div>
-  </Container>
+  </MainContainer>
 </template>
 
 <script>
-import Container from '../Shared/Container.vue';
+import MainContainer from '../Shared/MainContainer.vue';
 import GoogleButton from '../Auth/GoogleButton.vue';
+
+// import { Mail } from '@tabler/icons';
 
 export default {
   name: 'Login',
   components: {
     GoogleButton,
-    Container,
+    MainContainer,
   },
 };
 </script>

@@ -1,20 +1,21 @@
 <template>
-  <div id="LolContainer">
+  <MainContainer>
     <CriteriasMenu
       :ranks="criteriasRanks"
       :ranksImgs="criteriasRanksImg"
       :regions="criteriasRegions"
       :regionsImgs="criteriasRegionsImg"
     />
-  </div>
+  </MainContainer>
 </template>
 
 <script>
 import CriteriasMenu from '@/components/CriteriasMenu.vue';
+import MainContainer from './Shared/MainContainer.vue';
 
 export default {
   name: 'Lol',
-  components: { CriteriasMenu },
+  components: { CriteriasMenu, MainContainer },
   data: function () {
     return {
       criteriasRanks: [

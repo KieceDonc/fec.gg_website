@@ -6,22 +6,27 @@
       <GoogleButton />
       <p>Continuer avec l'adresse mail</p>
     </div>
+    <TextInput id="tmp" placeholder="Email" />
   </MainContainer>
 </template>
 
 <script>
 import MainContainer from '../Shared/MainContainer.vue';
 import GoogleButton from '../Auth/GoogleButton.vue';
-
-// import { Mail } from '@tabler/icons';
+import TextInput from '@/components/TextInput.vue';
 
 export default {
   name: 'Login',
   components: {
     GoogleButton,
     MainContainer,
+    TextInput,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#tmp {
+  margin: 20px;
+}
+</style>

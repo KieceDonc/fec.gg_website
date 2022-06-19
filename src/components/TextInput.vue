@@ -1,8 +1,10 @@
 <template>
   <div class="textInputContainer">
-    <mail-icon style="color: gray" class="textInputIcon" />
+    <div class="textInputIcon">
+      <slot></slot>
+    </div>
     <input
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       v-on:focus="onFocus"
       v-on:blur="onBlur"
@@ -11,23 +13,17 @@
 </template>
 
 <script>
-import { MailIcon } from 'vue-tabler-icons';
-
 export default {
   name: 'TextInput',
-  components: { MailIcon },
   props: {
     placeholder: {
       type: String,
       required: true,
     },
-    borderColorOnFocus: {
+    type: {
       type: String,
-      required: true,
-    },
-    borderColorOnBlur: {
-      type: String,
-      required: true,
+      default: 'text',
+      required: false,
     },
   },
   data: function () {
@@ -37,7 +33,7 @@ export default {
         .getPropertyValue('--main-border-color'),
       borderColorOnBlur: window
         .getComputedStyle(document.documentElement)
-        .getPropertyValue('--second-border-color'),
+        .getPropertyValue('--low-border-color'),
     };
   },
   methods: {
@@ -53,15 +49,17 @@ export default {
 <style scoped>
 .textInputContainer {
   display: flex;
-  border: 2px solid var(--second-border-color);
+  border: 2px solid var(--low-border-color);
   border-radius: 5px;
   width: fit-content;
   align-items: center;
   height: 40px;
+  width: 100%;
 }
 
 input {
   border: none;
+  font-size: 0.9em;
 }
 
 input:focus {
@@ -69,6 +67,8 @@ input:focus {
 }
 
 .textInputIcon {
-  margin: 5px;
+  margin: 0 0 0 5px;
+  display: flex;
+  align-items: center;
 }
 </style>

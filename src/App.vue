@@ -32,10 +32,14 @@ body {
   --main-border-color: var(--main-button-color);
   --second-border-color: #cccccc;
   --third-border-color: #999999;
+  --low-border-color: #eaeaea;
 
   --main-text-color: #000000;
   --second-text-color: #555555;
   --third-text-color: #3f3f3f;
+  --highlight-text-color: var(--main-button-color);
+
+  --orange-color: #ff7300;
 
   --header-height: 181px;
 }

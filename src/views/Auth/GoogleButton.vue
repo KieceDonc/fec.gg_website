@@ -23,6 +23,8 @@
   background-color: white;
   background-repeat: no-repeat;
   background-position: 12px 11px;
+
+  width: 100%;
 }
 
 .login-with-google-btn:hover {

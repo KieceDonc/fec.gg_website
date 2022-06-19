@@ -1,12 +1,42 @@
 <template>
   <MainContainer>
-    <h1>Content de te revoir !</h1>
-    <p>Vous n'avez pas encore de compte ? Inscrivez-vous ici</p>
-    <div>
-      <GoogleButton />
-      <p>Continuer avec l'adresse mail</p>
+    <div id="Login">
+      <h1 class="smallMarginBottom">Content de vous revoir !</h1>
+      <p class="marginBottom">
+        Vous n'avez pas encore de compte ?
+        <a href="" class="highlightText">S'inscrire ici</a>
+      </p>
+      <div id="LoginContainer">
+        <GoogleButton class="marginBottom" />
+        <Separator class="marginBottom"
+          >Ou continuer avec l'adresse mail</Separator
+        >
+        <div class="marginBottom parentWidth">
+          <MustBeCompleteText class="smallMarginBottom"
+            >Email</MustBeCompleteText
+          >
+          <TextInput placeholder="Votre email"
+            ><mail-icon style="color: gray"
+          /></TextInput>
+        </div>
+        <div class="marginBottom parentWidth">
+          <MustBeCompleteText class="smallMarginBottom"
+            >Mot de passe</MustBeCompleteText
+          >
+          <TextInput type="password" placeholder="Votre mot de passe">
+            <lock-icon style="color: gray"
+          /></TextInput>
+        </div>
+        <div class="displayGrid marginBottom parentWidth">
+          <div class="displayInline">
+            <input type="checkbox" />
+            <div>Se souvenir</div>
+          </div>
+          <div class="highlightText alignEnd">Mot de passe oublié ?</div>
+        </div>
+        <CustomButton>Se connecter</CustomButton>
+      </div>
     </div>
-    <TextInput id="tmp" placeholder="Email" />
   </MainContainer>
 </template>
 
@@ -14,6 +44,12 @@
 import MainContainer from '../Shared/MainContainer.vue';
 import GoogleButton from '../Auth/GoogleButton.vue';
 import TextInput from '@/components/TextInput.vue';
+import MustBeCompleteText from '@/components/MustBeCompleteText.vue';
+import Separator from '@/components/Separator.vue';
+import CustomButton from '@/components/CustomButton.vue';
+
+import { MailIcon } from 'vue-tabler-icons';
+import { LockIcon } from 'vue-tabler-icons';
 
 export default {
   name: 'Login',
@@ -21,12 +57,75 @@ export default {
     GoogleButton,
     MainContainer,
     TextInput,
+    MustBeCompleteText,
+    Separator,
+    CustomButton,
+    MailIcon,
+    LockIcon,
   },
 };
 </script>
 
 <style scoped>
-#tmp {
-  margin: 20px;
+#Login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#LoginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  border: 2px solid var(--low-border-color);
+  box-shadow: 1px 11px 18px 4px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.marginBottom {
+  margin-bottom: 30px;
+}
+
+.parentWidth {
+  width: 100%;
+}
+
+.smallMarginBottom {
+  margin-bottom: 10px;
+}
+
+.displayGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.displayInline {
+  display: flex;
+  align-items: center;
+}
+
+.highlightText {
+  color: var(--highlight-text-color);
+  text-decoration: none;
+}
+
+.alignEnd {
+  text-align: end;
+}
+
+p {
+  margin: 0;
+  color: var(--second-text-color);
 }
 </style>

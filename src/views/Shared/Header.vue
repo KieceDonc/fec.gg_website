@@ -2,8 +2,8 @@
   <div
     id="headerContainer"
     v-bind:class="{
-      headerBeforeScroll: isInBeforeScrollStateLvl1,
-      headerNormal: !isInBeforeScrollStateLvl1,
+      headerBeforeScroll: hiddenModeLvl1,
+      headerNormal: !hiddenModeLvl1,
     }"
   >
     <div id="headerUpContainer">
@@ -13,8 +13,8 @@
           <div
             id="brandPoint"
             v-bind:class="{
-              brandPointBeforeScroll: isInBeforeScrollStateLvl1,
-              brandPointNormal: !isInBeforeScrollStateLvl1,
+              brandPointBeforeScroll: hiddenModeLvl1,
+              brandPointNormal: !hiddenModeLvl1,
             }"
           >
             .
@@ -24,8 +24,8 @@
         <SearchBar
           id="headerSearchBar"
           v-bind:class="{
-            headerSearchBarVisible: !isInBeforeScrollStateLvl2,
-            headerSearchBarHidden: isInBeforeScrollStateLvl2,
+            headerSearchBarVisible: !hiddenModeLvl2,
+            headerSearchBarHidden: hiddenModeLvl2,
           }"
         />
       </div>
@@ -33,22 +33,22 @@
         <a class="menuButton">Français</a>
         <a class="menuButton">Donner des cours</a>
         <router-link class="menuButton" to="/Login">Se connecter</router-link>
-        <a
+        <CustomButton
           v-bind:class="{
-            registerBeforeScroll: isInBeforeScrollStateLvl1,
-            registerNormal: !isInBeforeScrollStateLvl1,
+            registerBeforeScroll: hiddenModeLvl1,
+            registerNormal: !hiddenModeLvl1,
           }"
           class="menuButton"
           id="register"
-          >S'inscrire</a
+          >S'inscrire</CustomButton
         >
       </div>
     </div>
 
     <div
       v-bind:class="{
-        categoryContainerBeforeScroll: isInBeforeScrollStateLvl2,
-        categoryContainerNormal: !isInBeforeScrollStateLvl2,
+        categoryContainerBeforeScroll: hiddenModeLvl2,
+        categoryContainerNormal: !hiddenModeLvl2,
       }"
       id="categoryContainer"
     >
@@ -67,24 +67,23 @@
 
 <script>
 import SearchBar from '../../components/SearchBar.vue';
+
 export default {
   name: 'Header',
   components: { SearchBar },
   data: function () {
     return {
       scrollPosition: 0,
-      isInBeforeScrollStateLvl1: this.isInHomePage,
-      isInBeforeScrollStateLvl2: this.isInHomePage,
+      hiddenModeLvl1: this.isInHomePage,
+      hiddenModeLvl2: this.isInHomePage,
       isInHomePage: true,
     };
   },
   methods: {
     updateScroll() {
       this.scrollPosition = window.scrollY;
-      this.isInBeforeScrollStateLvl1 =
-        this.isInHomePage && this.scrollPosition == 0;
-      this.isInBeforeScrollStateLvl2 =
-        this.isInHomePage && this.scrollPosition < 225;
+      this.hiddenModeLvl1 = this.isInHomePage && this.scrollPosition == 0;
+      this.hiddenModeLvl2 = this.isInHomePage && this.scrollPosition < 225;
     },
     addScrollListener() {
       window.addEventListener('scroll', this.updateScroll);

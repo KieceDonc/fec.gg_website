@@ -2,8 +2,8 @@
   <div
     id="headerContainer"
     v-bind:class="{
-      headerBeforeScroll: hiddenModeLvl1,
-      headerNormal: !hiddenModeLvl1,
+      headerLvl0: !(scrollLvl1 || scrollLvl2),
+      headerLvl1: scrollLvl1 || scrollLvl2,
     }"
   >
     <div id="headerUpContainer">
@@ -13,8 +13,8 @@
           <div
             id="brandPoint"
             v-bind:class="{
-              brandPointBeforeScroll: hiddenModeLvl1,
-              brandPointNormal: !hiddenModeLvl1,
+              brandPointLvl0: !(scrollLvl1 || scrollLvl2),
+              scrollLvl1: scrollLvl1 || scrollLvl2,
             }"
           >
             .
@@ -24,8 +24,8 @@
         <SearchBar
           id="headerSearchBar"
           v-bind:class="{
-            headerSearchBarVisible: !hiddenModeLvl2,
-            headerSearchBarHidden: hiddenModeLvl2,
+            headerSearchLvl0: !scrollLvl2 && isInHomePage,
+            headerSearchLvl2: scrollLvl2 || !isInHomePage,
           }"
         />
       </div>
@@ -33,57 +33,86 @@
         <a class="menuButton">Français</a>
         <a class="menuButton">Donner des cours</a>
         <router-link class="menuButton" to="/Login">Se connecter</router-link>
-        <CustomButton
+        <a
           v-bind:class="{
-            registerBeforeScroll: hiddenModeLvl1,
-            registerNormal: !hiddenModeLvl1,
+            registerLvl0: !(scrollLvl1 || scrollLvl2),
+            registerLvl1: scrollLvl1 || scrollLvl2,
           }"
           class="menuButton"
           id="register"
-          >S'inscrire</CustomButton
         >
+          S'inscrire
+        </a>
       </div>
     </div>
 
     <div
       v-bind:class="{
-        categoryContainerBeforeScroll: hiddenModeLvl2,
-        categoryContainerNormal: !hiddenModeLvl2,
+        categoryContainerLvl2: scrollLvl2,
+        categoryContainerLvl0: !scrollLvl2,
       }"
       id="categoryContainer"
     >
-      <router-link class="category" to="/LoL">LoL</router-link>
-      <router-link class="category" to="/LoL">Valorant</router-link>
-      <router-link class="category" to="/LoL">TFT</router-link>
-      <router-link class="category" to="/LoL">Wild Rift</router-link>
-      <router-link class="category" to="/LoL">RL</router-link>
-      <router-link class="category" to="/LoL">CS:GO</router-link>
-      <router-link class="category" to="/LoL">OW</router-link>
-      <router-link class="category" to="/LoL">SSBU</router-link>
-      <router-link class="category" to="/LoL">Others</router-link>
+      <HeaderCategory to="/lol" text="Lol" :iconPath="icons.lol" />
+      <HeaderCategory
+        to="/valorant"
+        text="Valorant"
+        :iconPath="icons.valorant"
+      />
+      <HeaderCategory to="/tft" text="TFT" :iconPath="icons.tft" />
+      <HeaderCategory
+        to="/wildRift"
+        text="Wild Rift"
+        :iconPath="icons.wildRift"
+      />
+      <HeaderCategory to="rl" text="RL" :iconPath="icons.rl" />
+      <HeaderCategory to="/csgo" text="CS:GO" :iconPath="icons.csgo" />
+      <HeaderCategory to="/ow" text="OW" :iconPath="icons.ow" />
+      <HeaderCategory to="/ssbu" text="SSBU" :iconPath="icons.ssbu" />
+      <HeaderCategory to="/Others" text="Others" :iconPath="icons.others" />
     </div>
   </div>
 </template>
 
 <script>
 import SearchBar from '../../components/SearchBar.vue';
+import HeaderCategory from '@/components/HeaderCategory.vue';
+import CustomButton from '@/components/CustomButton.vue';
 
 export default {
   name: 'Header',
-  components: { SearchBar },
+  components: { SearchBar, HeaderCategory },
   data: function () {
     return {
       scrollPosition: 0,
-      hiddenModeLvl1: this.isInHomePage,
-      hiddenModeLvl2: this.isInHomePage,
+      scrollLvl0: this.isInHomePage,
+      scrollLvl1: this.isInHomePage,
+      scrollLvl2: this.isInHomePage,
       isInHomePage: true,
+      icons: {
+        lol: require('@/assets/lol/icon.webp'),
+        valorant: require('@/assets/valorant/icon.jpg'),
+        tft: require('@/assets/tft/icon.png'),
+        wildRift: require('@/assets/wildRift/icon.webp'),
+        rl: require('@/assets/rl/icon.webp'),
+        csgo: require('@/assets/csgo/icon.png'),
+        ow: require('@/assets/ow/icon.png'),
+        ssbu: require('@/assets/ssbu/icon.png'),
+        others: require('@/assets/others/icon.png'),
+      },
     };
   },
   methods: {
     updateScroll() {
       this.scrollPosition = window.scrollY;
-      this.hiddenModeLvl1 = this.isInHomePage && this.scrollPosition == 0;
-      this.hiddenModeLvl2 = this.isInHomePage && this.scrollPosition < 225;
+      this.scrollLvl1 =
+        (this.isInHomePage &&
+          this.scrollPosition >= 100 &&
+          this.scrollPosition < 200) ||
+        (!this.isInHomePage && this.scrollPosition >= 100);
+      this.scrollLvl2 =
+        (this.isInHomePage && this.scrollPosition >= 200) ||
+        (!this.isInHomePage && this.scrollPosition < 100);
     },
     addScrollListener() {
       window.addEventListener('scroll', this.updateScroll);
@@ -95,19 +124,12 @@ export default {
   watch: {
     $route(to, from) {
       window.scrollTo(0, 0);
-
-      if (to.fullPath === '/') {
-        this.isInHomePage = true;
-        this.addScrollListener();
-      } else {
-        this.isInHomePage = false;
-        if (from.fullPath === '/') {
-          this.removeScrollListener();
-        }
-      }
-
+      this.isInHomePage = to.fullPath === '/';
       this.updateScroll();
     },
+  },
+  mounted() {
+    this.addScrollListener();
   },
   destroy() {
     if (this.isInHomePage) {
@@ -126,12 +148,12 @@ export default {
   width: 100%;
 }
 
-.headerBeforeScroll {
+.headerLvl0 {
   color: white;
   transition: background-color 400ms linear;
 }
 
-.headerNormal {
+.headerLvl1 {
   background-color: var(--second-background-color);
   z-index: 200;
   color: black;
@@ -167,11 +189,11 @@ export default {
   line-height: 0;
 }
 
-.brandPointBeforeScroll {
+.brandPointLvl0 {
   color: white;
 }
 
-.brandPointNormal {
+.scrollLvl1 {
   color: var(--main-border-color);
 }
 
@@ -180,12 +202,12 @@ export default {
   transition: opacity 400ms linear;
 }
 
-.headerSearchBarVisible {
+.headerSearchLvl2 {
   visibility: visible;
   opacity: 1;
 }
 
-.headerSearchBarHidden {
+.headerSearchLvl0 {
   visibility: hidden;
   opacity: 0;
 }
@@ -213,11 +235,11 @@ export default {
   margin-right: 100px;
 }
 
-.registerBeforeScroll {
+.registerLvl0 {
   border: 2px solid white;
 }
 
-.registerNormal {
+.registerLvl1 {
   border: 2px solid var(--main-button-color);
 }
 
@@ -228,7 +250,7 @@ export default {
   color: var(--second-text-color);
 }
 
-.categoryContainerBeforeScroll {
+.categoryContainerLvl0 {
   opacity: 0;
   height: 0;
   overflow: hidden;
@@ -236,27 +258,11 @@ export default {
   border: 0;
 }
 
-.categoryContainerNormal {
+.categoryContainerLvl2 {
   opacity: 1;
   height: auto;
   margin-top: 20px;
   border-top: 1px solid var(--second-border-color);
   border-bottom: 1px solid var(--second-border-color);
-}
-
-.category {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: auto;
-  padding-right: auto;
-  display: table-cell;
-  width: 100%;
-  text-align: center;
-  color: inherit;
-  text-decoration: none;
-}
-
-.category:hover {
-  text-decoration: underline;
 }
 </style>

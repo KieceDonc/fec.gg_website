@@ -15,17 +15,17 @@
           <MustBeCompleteText class="smallMarginBottom"
             >Email</MustBeCompleteText
           >
-          <TextInput placeholder="Votre email"
-            ><mail-icon style="color: gray"
-          /></TextInput>
+          <CustomInput placeholder="Votre email" :icon="mailIcon" />
         </div>
         <div class="marginBottom parentWidth">
           <MustBeCompleteText class="smallMarginBottom"
             >Mot de passe</MustBeCompleteText
           >
-          <TextInput type="password" placeholder="Votre mot de passe">
-            <lock-icon style="color: gray"
-          /></TextInput>
+          <CustomInput
+            type="password"
+            placeholder="Votre mot de passe"
+            :icon="lockIcon"
+          />
         </div>
         <div class="displayGrid marginBottom parentWidth">
           <div class="displayInline">
@@ -35,6 +35,12 @@
           <div class="highlightText alignEnd">Mot de passe oublié ?</div>
         </div>
         <CustomButton>Se connecter</CustomButton>
+        <CustomInput
+          type="password"
+          placeholder="Votre mot de passe"
+          :icon="lockIcon"
+        >
+        </CustomInput>
       </div>
     </div>
   </MainContainer>
@@ -43,25 +49,31 @@
 <script>
 import MainContainer from '../Shared/MainContainer.vue';
 import GoogleButton from '../Auth/GoogleButton.vue';
-import TextInput from '@/components/TextInput.vue';
+import CustomInput from '@/components/CustomInput.vue';
 import MustBeCompleteText from '@/components/MustBeCompleteText.vue';
 import Separator from '@/components/Separator.vue';
 import CustomButton from '@/components/CustomButton.vue';
 
-import { MailIcon } from 'vue-tabler-icons';
-import { LockIcon } from 'vue-tabler-icons';
+import MailIcon from '@/components/TablerIcons/MailIcon.vue';
+import LockIcon from '@/components/TablerIcons/LockIcon.vue';
 
 export default {
   name: 'Login',
   components: {
     GoogleButton,
     MainContainer,
-    TextInput,
+    CustomInput,
     MustBeCompleteText,
     Separator,
     CustomButton,
     MailIcon,
     LockIcon,
+  },
+  data() {
+    return {
+      lockIcon: <LockIcon style="color: gray" />,
+      mailIcon: <MailIcon style="color: gray" />,
+    };
   },
 };
 </script>

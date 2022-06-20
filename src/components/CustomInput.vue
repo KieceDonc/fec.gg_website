@@ -1,7 +1,7 @@
 <template>
-  <div class="textInputContainer">
-    <div class="textInputIcon">
-      <slot></slot>
+  <div class="CustomInputContainer">
+    <div class="CustomInputIcon">
+      <component :is="icon"></component>
     </div>
     <input
       :type="type"
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'TextInput',
+  name: 'CustomInput',
   props: {
     placeholder: {
       type: String,
@@ -23,6 +23,10 @@ export default {
     type: {
       type: String,
       default: 'text',
+      required: false,
+    },
+    icon: {
+      type: Object,
       required: false,
     },
   },
@@ -39,6 +43,8 @@ export default {
   methods: {
     onFocus: function (event) {
       event.target.parentElement.style.borderColor = this.borderColorOnFocus;
+      console.log(this.icon);
+      console.log(this.icon.type.render());
     },
     onBlur: function (event) {
       event.target.parentElement.style.borderColor = this.borderColorOnBlur;
@@ -47,12 +53,10 @@ export default {
 };
 </script>
 <style scoped>
-.textInputContainer {
+.CustomInputContainer {
   display: flex;
   border: 2px solid var(--low-border-color);
   border-radius: 5px;
-  width: fit-content;
-  align-items: center;
   height: 40px;
   width: 100%;
 }
@@ -66,7 +70,7 @@ input:focus {
   outline: none;
 }
 
-.textInputIcon {
+.CustomInputIcon {
   margin: 0 0 0 5px;
   display: flex;
   align-items: center;

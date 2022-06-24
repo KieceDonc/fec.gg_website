@@ -43,8 +43,6 @@ export default {
   methods: {
     onFocus: function (event) {
       event.target.parentElement.style.borderColor = this.borderColorOnFocus;
-      console.log(this.icon);
-      console.log(this.icon.type.render());
     },
     onBlur: function (event) {
       event.target.parentElement.style.borderColor = this.borderColorOnBlur;

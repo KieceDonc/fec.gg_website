@@ -53,23 +53,15 @@
       }"
       id="categoryContainer"
     >
-      <HeaderCategory to="/lol" text="Lol" :iconPath="icons.lol" />
-      <HeaderCategory
-        to="/valorant"
-        text="Valorant"
-        :iconPath="icons.valorant"
-      />
-      <HeaderCategory to="/tft" text="TFT" :iconPath="icons.tft" />
-      <HeaderCategory
-        to="/wildRift"
-        text="Wild Rift"
-        :iconPath="icons.wildRift"
-      />
-      <HeaderCategory to="rl" text="RL" :iconPath="icons.rl" />
-      <HeaderCategory to="/csgo" text="CS:GO" :iconPath="icons.csgo" />
-      <HeaderCategory to="/ow" text="OW" :iconPath="icons.ow" />
-      <HeaderCategory to="/ssbu" text="SSBU" :iconPath="icons.ssbu" />
-      <HeaderCategory to="/Others" text="Others" :iconPath="icons.others" />
+      <HeaderCategory to="/lol" text="Lol" />
+      <HeaderCategory to="/valorant" text="Valorant" />
+      <HeaderCategory to="/tft" text="TFT" />
+      <HeaderCategory to="/wildRift" text="Wild Rift" />
+      <HeaderCategory to="rl" text="RL" />
+      <HeaderCategory to="/csgo" text="CS:GO" />
+      <HeaderCategory to="/ow" text="OW" />
+      <HeaderCategory to="/ssbu" text="SSBU" />
+      <HeaderCategory to="/Others" text="Others" />
     </div>
   </div>
 </template>
@@ -77,7 +69,6 @@
 <script>
 import SearchBar from '../../components/SearchBar.vue';
 import HeaderCategory from '@/components/HeaderCategory.vue';
-import CustomButton from '@/components/CustomButton.vue';
 
 export default {
   name: 'Header',
@@ -89,17 +80,6 @@ export default {
       scrollLvl1: this.isInHomePage,
       scrollLvl2: this.isInHomePage,
       isInHomePage: true,
-      icons: {
-        lol: require('@/assets/lol/icon.webp'),
-        valorant: require('@/assets/valorant/icon.jpg'),
-        tft: require('@/assets/tft/icon.png'),
-        wildRift: require('@/assets/wildRift/icon.webp'),
-        rl: require('@/assets/rl/icon.webp'),
-        csgo: require('@/assets/csgo/icon.png'),
-        ow: require('@/assets/ow/icon.png'),
-        ssbu: require('@/assets/ssbu/icon.png'),
-        others: require('@/assets/others/icon.png'),
-      },
     };
   },
   methods: {

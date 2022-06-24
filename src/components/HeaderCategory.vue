@@ -1,6 +1,5 @@
 <template>
   <router-link class="category" :to="to">
-    <img class="categoryImg" :src="iconPath" alt="" />
     <div>{{ text }}</div>
   </router-link>
 </template>
@@ -40,10 +39,5 @@ export default {
 
 .category:hover {
   text-decoration: underline;
-}
-
-.categoryImg {
-  width: 42px;
-  height: 42px;
 }
 </style>

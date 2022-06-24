@@ -12,12 +12,43 @@
       </div>
     </div>
     <div id="searchImgContainer">
-      <img
+      <!--<img
         class="searchImg"
         src="../assets/lol/background.jpg"
         alt="search background"
         style="display: flex"
-      />
+      />-->
+      <carousel
+        :items-to-show="1"
+        :autoplay="5000"
+        :wrap-around="true"
+        :pauseAutoplayOnHover="false"
+        :mouseDrag="false"
+        :touchDrag="false"
+      >
+        <slide :key="slide">
+          <img
+            class="searchImg"
+            src="../assets/lol/background.jpg"
+            alt="search background"
+            style="display: flex"
+          />
+        </slide>
+        <slide :key="slide">
+          <img
+            class="searchImg"
+            src="../assets/valorant/background.jpg"
+            alt="search background"
+          />
+        </slide>
+        <slide :key="slide">
+          <img
+            class="searchImg"
+            src="../assets/tft/background.jpg"
+            alt="search background"
+          />
+        </slide>
+      </carousel>
     </div>
   </div>
 
@@ -25,12 +56,16 @@
 </template>
 
 <script>
-import SearchBar from '../components/SearchBar.vue';
+import SearchBar from '@/components/SearchBar.vue';
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide } from 'vue3-carousel';
 
 export default {
   name: 'Home',
   components: {
     SearchBar,
+    Carousel,
+    Slide,
   },
 };
 </script>
@@ -94,6 +129,7 @@ export default {
 .searchImg {
   filter: grayscale(0.6);
   opacity: 0.15;
+  height: 500px;
   width: 100%;
   object-fit: cover;
   z-index: 50;

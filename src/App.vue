@@ -41,7 +41,7 @@ body {
 
   --orange-color: #ff7300;
 
-  --header-height: 227px;
+  --header-height: 181px;
 }
 </style>
 

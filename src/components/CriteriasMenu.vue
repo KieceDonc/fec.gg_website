@@ -4,21 +4,21 @@
       <h3>Budget</h3>
       <div id="budgetSecondContainer">
         <div>
-          <p>MIN.</p>
+          <p class="budgetDescription">MIN.</p>
           <input type="number" id="budgetMin" placeholder="Montant" />
         </div>
         <div>
-          <p>MAX.</p>
+          <p class="budgetDescription">MAX.</p>
           <input type="number" id="budgetMax" placeholder="Montant" />
         </div>
       </div>
     </div>
     <div id="comments">
       <h3>Avis</h3>
-      <div>5</div>
-      <div>4</div>
-      <div>3</div>
-      <div>Tout</div>
+      <p>Montrer les avis supérieurs à :</p>
+      <div id="starRatingContainer">
+        <StarRating />
+      </div>
     </div>
     <div id="languages">
       <h3>Langues</h3>
@@ -88,6 +88,8 @@
 </template>
 
 <script>
+import StarRating from './StarRating.vue';
+
 export default {
   name: 'CriteriasMenu',
   props: {
@@ -113,19 +115,16 @@ export default {
       let hiddenElements = document
         .getElementById(containerID)
         .querySelectorAll('.' + hiddenClassName);
-
       // We check if there is more hidden elements than the base showed elements
       let toShowLength = hiddenElements.length >= 3 ? 3 : hiddenElements.length;
-
       // We show 3 hidden elements
       for (let index = 0; index < toShowLength; index++) {
         hiddenElements[index].classList.remove(hiddenClassName);
       }
-
       // We update the more criterias button
       let moreCriteriasElement = document.getElementById(moreCriteriasID);
       if (toShowLength == hiddenElements.length) {
-        moreCriteriasElement.innerHTML = 'Plus de critères';
+        moreCriteriasElement.innerHTML = 'Plus aucun critères';
       } else {
         let hiddenLength = document
           .getElementById(containerID)
@@ -140,6 +139,7 @@ export default {
       baseShowedRegions: 4,
     };
   },
+  components: { StarRating },
 };
 </script>
 
@@ -175,6 +175,10 @@ h3 {
   color: var(--second-text-color);
 }
 
+.budgetDescription {
+  font-size: 0.8em;
+}
+
 #budget input {
   margin-top: 10px;
   width: 120px;
@@ -196,6 +200,20 @@ h3 {
 
 #budget p {
   margin: 0;
+}
+
+#comments > *:not(h3) {
+  color: var(--second-text-color);
+}
+
+#comments > p {
+  margin-bottom: 0;
+  margin-top: 8px;
+  font-size: 0.95em;
+}
+
+#starRatingContainer {
+  font-size: 30px;
 }
 
 .criteria {

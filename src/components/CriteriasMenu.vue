@@ -18,7 +18,7 @@
       <div>5</div>
       <div>4</div>
       <div>3</div>
-      <diV>Tout</diV>
+      <div>Tout</div>
     </div>
     <div id="languages">
       <h3>Langues</h3>
@@ -28,29 +28,57 @@
       <div>DN</div>
     </div>
     <div id="ranks">
-      <h3>Rank</h3>
+      <h3>Rang</h3>
       <div v-for="(rank, index) in ranks">
-        <div>
-          <img
-            :src="ranksImgs[index]"
-            alt="rank img"
-            style="width: 50px; height: 50px"
-          />
-          {{ rank }}
+        <div
+          class="criteria"
+          v-bind:class="{
+            hiddenCriterias: !(index < baseShowedRanks),
+          }"
+        >
+          <img :src="ranksImgs[index]" alt="rank img" class="imgs" />
+          <span>
+            {{ rank }}
+          </span>
         </div>
+      </div>
+      <div
+        id="rankMoreCriterias"
+        class="moreCriterias"
+        v-on:click="
+          moreCriteriasHandler('ranks', 'hiddenCriterias', 'rankMoreCriterias')
+        "
+      >
+        + ({{ ranks.length - baseShowedRanks }}) critères
       </div>
     </div>
     <div id="regions">
       <h3>Régions</h3>
       <div v-for="(region, index) in regions">
-        <div>
-          <img
-            :src="regionsImgs[index]"
-            alt="regions img"
-            style="width: 50px; height: 50px"
-          />
-          {{ region }}
+        <div
+          class="criteria"
+          v-bind:class="{
+            hiddenCriterias: !(index < baseShowedRegions),
+          }"
+        >
+          <img :src="regionsImgs[index]" alt="regions img" class="imgs" />
+          <span>
+            {{ region }}
+          </span>
         </div>
+      </div>
+      <div
+        id="regionMoreCriterias"
+        class="moreCriterias"
+        v-on:click="
+          moreCriteriasHandler(
+            'regions',
+            'hiddenCriterias',
+            'regionMoreCriterias'
+          )
+        "
+      >
+        + ({{ regions.length - baseShowedRegions }}) critères
       </div>
     </div>
     <div id="platform">
@@ -80,6 +108,38 @@ export default {
       required: true,
     },
   },
+  methods: {
+    moreCriteriasHandler(containerID, hiddenClassName, moreCriteriasID) {
+      let hiddenElements = document
+        .getElementById(containerID)
+        .querySelectorAll('.' + hiddenClassName);
+
+      // We check if there is more hidden elements than the base showed elements
+      let toShowLength = hiddenElements.length >= 3 ? 3 : hiddenElements.length;
+
+      // We show 3 hidden elements
+      for (let index = 0; index < toShowLength; index++) {
+        hiddenElements[index].classList.remove(hiddenClassName);
+      }
+
+      // We update the more criterias button
+      let moreCriteriasElement = document.getElementById(moreCriteriasID);
+      if (toShowLength == hiddenElements.length) {
+        moreCriteriasElement.innerHTML = 'Plus de critères';
+      } else {
+        let hiddenLength = document
+          .getElementById(containerID)
+          .querySelectorAll('.' + hiddenClassName).length;
+        moreCriteriasElement.innerHTML = '+ (' + hiddenLength + ') critères';
+      }
+    },
+  },
+  data() {
+    return {
+      baseShowedRanks: 4,
+      baseShowedRegions: 4,
+    };
+  },
 };
 </script>
 
@@ -91,7 +151,7 @@ h3 {
 
 #criteriasContainer {
   background-color: var(--third-background-color);
-  width: 400px;
+  width: fit-content;
   padding: 20px;
   margin: 40px;
 }
@@ -136,5 +196,30 @@ h3 {
 
 #budget p {
   margin: 0;
+}
+
+.criteria {
+  cursor: pointer;
+}
+
+.hiddenCriterias {
+  display: none;
+}
+
+.moreCriterias {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--highlight-text-color);
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.imgs {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  vertical-align: middle;
 }
 </style>

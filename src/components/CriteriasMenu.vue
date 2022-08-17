@@ -15,29 +15,31 @@
     </div>
     <div id="comments">
       <h3>Avis</h3>
-      <p>Montrer les avis supérieurs à :</p>
-      <div id="starRatingContainer">
+      <p class="secondTextColor">Montrer les avis supérieurs à :</p>
+      <div class="secondTextColor" id="starRatingContainer">
         <StarRating />
       </div>
     </div>
     <div id="languages">
       <h3>Langues</h3>
-      <div>FR</div>
-      <div>EN</div>
-      <div>ES</div>
-      <div>DN</div>
+      <div class="secondTextColor">
+        <div>FR</div>
+        <div>EN</div>
+        <div>ES</div>
+        <div>DN</div>
+      </div>
     </div>
     <div id="ranks">
       <h3>Rang</h3>
       <div v-for="(rank, index) in ranks">
         <div
-          class="criteria"
           v-bind:class="{
             hiddenCriterias: !(index < baseShowedRanks),
           }"
+          class="transitionCriterias"
         >
           <img :src="ranksImgs[index]" alt="rank img" class="imgs" />
-          <span>
+          <span class="secondTextColor">
             {{ rank }}
           </span>
         </div>
@@ -56,13 +58,13 @@
       <h3>Régions</h3>
       <div v-for="(region, index) in regions">
         <div
-          class="criteria"
           v-bind:class="{
             hiddenCriterias: !(index < baseShowedRegions),
           }"
+          class="transitionCriterias"
         >
           <img :src="regionsImgs[index]" alt="regions img" class="imgs" />
-          <span>
+          <span class="secondTextColor">
             {{ region }}
           </span>
         </div>
@@ -119,12 +121,13 @@ export default {
       let toShowLength = hiddenElements.length >= 3 ? 3 : hiddenElements.length;
       // We show 3 hidden elements
       for (let index = 0; index < toShowLength; index++) {
-        hiddenElements[index].classList.remove(hiddenClassName);
+        hiddenElements[index].classList =
+          'visibleCriterias transitionCriterias';
       }
       // We update the more criterias button
       let moreCriteriasElement = document.getElementById(moreCriteriasID);
       if (toShowLength == hiddenElements.length) {
-        moreCriteriasElement.innerHTML = 'Plus aucun critères';
+        moreCriteriasElement.innerHTML = 'Plus aucun critère';
       } else {
         let hiddenLength = document
           .getElementById(containerID)
@@ -147,6 +150,10 @@ export default {
 h3 {
   margin: 0;
   padding-bottom: 10px;
+}
+
+.secondTextColor {
+  color: var(--second-text-color);
 }
 
 #criteriasContainer {
@@ -202,10 +209,6 @@ h3 {
   margin: 0;
 }
 
-#comments > *:not(h3) {
-  color: var(--second-text-color);
-}
-
 #comments > p {
   margin-bottom: 0;
   margin-top: 8px;
@@ -215,13 +218,28 @@ h3 {
 #starRatingContainer {
   font-size: 30px;
 }
-
 .criteria {
   cursor: pointer;
 }
 
 .hiddenCriterias {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+}
+
+.visibleCriterias {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+}
+
+.transitionCriterias {
+  transition: opacity 400ms linear;
+}
+
+.transitionCriterias::marker {
+  color: red;
 }
 
 .moreCriterias {

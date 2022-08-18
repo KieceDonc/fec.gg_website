@@ -5,11 +5,13 @@
       <div id="budgetSecondContainer">
         <div>
           <p class="budgetDescription">MIN.</p>
-          <input type="number" id="budgetMin" placeholder="Montant" />
+          <MoneyInput placeholder="Montant" />
+          <!--<input type="number" id="budgetMin" placeholder="Montant" />-->
         </div>
         <div>
           <p class="budgetDescription">MAX.</p>
-          <input type="number" id="budgetMax" placeholder="Montant" />
+          <MoneyInput placeholder="Montant" />
+          <!--<input type="number" id="budgetMax" placeholder="Montant" />-->
         </div>
       </div>
     </div>
@@ -91,6 +93,7 @@
 
 <script>
 import StarRating from './StarRating.vue';
+import MoneyInput from './MoneyInput.vue';
 
 export default {
   name: 'CriteriasMenu',
@@ -142,7 +145,7 @@ export default {
       baseShowedRegions: 4,
     };
   },
-  components: { StarRating },
+  components: { StarRating, MoneyInput },
 };
 </script>
 
@@ -184,25 +187,6 @@ h3 {
 
 .budgetDescription {
   font-size: 0.8em;
-}
-
-#budget input {
-  margin-top: 10px;
-  width: 120px;
-  height: 30px;
-  border-radius: 4px;
-  border: 2px solid var(--second-border-color);
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-}
-
-#budget input:focus {
-  appearance: none;
-  outline: 2px solid var(--second-border-color);
-  border-radius: 4px;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
 }
 
 #budget p {

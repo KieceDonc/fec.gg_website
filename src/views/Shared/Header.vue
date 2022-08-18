@@ -204,6 +204,7 @@ export default {
   padding-bottom: 5px;
   font-size: 18px;
   text-decoration: none;
+  color: unset;
 }
 
 .menuButton:visited {
